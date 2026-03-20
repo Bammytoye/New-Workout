@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useAuthContext } from "./hooks/UseAuthContext";
 
 // Components and Pages
@@ -7,14 +7,19 @@ import Navbar from "./Component/Navbar";
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import About from './Pages/About';
+import Footer from "./Component/Footer";
 
 function App() {
   const { user } = useAuthContext();
+  const location = useLocation();
+
+  const hideLayout = ['/login', '/signup'].includes(location.pathname);
 
   return (
-    <div className="App">
-      <Navbar />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col">
+      {!hideLayout && <Navbar />}
+
+      <main className="flex-1">
         <Routes>
           <Route
             path="/home"
@@ -32,8 +37,14 @@ function App() {
             path="/signup"
             element={!user ? <SignUp /> : <Navigate to="/home" />}
           />
+          <Route
+            path="/"
+            element={<Navigate to={user ? "/home" : "/login"} />}
+          />
         </Routes>
-      </div>
+      </main>
+
+      {!hideLayout && <Footer />}
     </div>
   );
 }
