@@ -34,7 +34,7 @@ const SignUp = () => {
                         <Link to="/" className="inline-flex items-center gap-2 no-underline mb-6">
                             <div className="w-9 h-9 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center shadow-sm">
                                 <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24">
-                                    <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z"/>
+                                    <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z" />
                                 </svg>
                             </div>
                             <span className="text-gray-900 font-extrabold text-lg tracking-tight">
@@ -142,13 +142,19 @@ const SignUp = () => {
                     </form>
 
                     {/* ── Footer ── */}
-                    <p className="text-center text-gray-400 text-sm mt-6">
+                    <p className="text-center text-gray-400 text-sm mt-2">
                         Already have an account?{' '}
                         <Link to="/login" className="text-green-600 font-semibold hover:text-green-700 no-underline transition-colors duration-200">
                             Log in here
                         </Link>
                     </p>
-                    
+
+                    <p className="text-center text-gray-400 text-sm">
+                        Just Browsing {' '}
+                        <Link to="/" className="text-green-600 font-semibold hover:text-green-700 no-underline transition-colors duration-200">
+                            Home Page
+                        </Link>
+                    </p>
                 </div>
             </div>
         </div>

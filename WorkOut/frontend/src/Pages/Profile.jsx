@@ -6,7 +6,7 @@ import { useAuthContext } from '../hooks/UseAuthContext'
 import WorkoutDetails from '../Component/WorkoutDetails'
 import WorkoutForm from '../Component/Workoutform'
 
-const Home = () => {
+const Profile = () => {
     const { workouts, dispatch } = useWorkoutContext()
     const { user } = useAuthContext()
 
@@ -39,7 +39,7 @@ const Home = () => {
                 {/* ── Page Header ── */}
                 <div className="mb-8">
                     <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
-                        My Workouts
+                        My Profile
                     </h1>
                     <p className="text-gray-400 text-sm mt-1">
                         Welcome back, <span className="text-green-600 font-medium">{user?.email}</span>
@@ -91,7 +91,6 @@ const Home = () => {
                                 </div>
                             </>
                         ) : (
-                            /* ── Empty State ── */
                             <div className="flex flex-col items-center justify-center bg-white border border-dashed border-gray-200 rounded-2xl py-16 px-6 text-center">
                                 <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-green-500">
@@ -116,4 +115,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Profile

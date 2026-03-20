@@ -21,17 +21,21 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', onScroll)
     }, [])
 
-    // Close menu on route change
     useEffect(() => {
         setMenuOpen(false)
     }, [location])
 
-    const navLinks = [
-        { to: '/home', label: 'Home' },
-        { to: '/about', label: 'About Us' },
-    ]
-
     const isActive = (path) => location.pathname === path
+
+    // Nav links change based on auth state
+    const navLinks = user
+        ? [
+            { to: '/home', label: 'Home' },
+            { to: '/about', label: 'About Us' },
+          ]
+        : [
+            { to: '/about', label: 'About Us' },
+          ]
 
     return (
         <header
@@ -76,18 +80,35 @@ const Navbar = () => {
                     {/* ── Desktop Auth ── */}
                     <div className="hidden md:flex items-center gap-3">
                         {user ? (
-                            <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-full pl-3 pr-1 py-1">
-                                <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                    <span className="text-green-700 text-xs font-bold uppercase">
-                                        {user.email?.[0]}
+                            <div className="flex items-center gap-2">
+                                {/* Profile pill link */}
+                                <Link
+                                    to="/profile"
+                                    className={`flex items-center gap-2 border rounded-full pl-2 pr-3 py-1 transition-all duration-200 no-underline ${
+                                        isActive('/profile')
+                                            ? 'bg-green-50 border-green-200'
+                                            : 'bg-gray-50 border-gray-200 hover:border-green-200 hover:bg-green-50'
+                                    }`}
+                                >
+                                    {/* Avatar */}
+                                    <div className="w-6 h-6 rounded-full bg-green-600 flex items-center justify-center flex-shrink-0">
+                                        <span className="text-white text-xs font-bold uppercase">
+                                            {user.email?.[0]}
+                                        </span>
+                                    </div>
+                                    <span className="text-gray-700 text-sm font-medium max-w-[130px] truncate">
+                                        {user.email}
                                     </span>
-                                </div>
-                                <span className="text-gray-700 text-sm font-medium max-w-[140px] truncate">
-                                    {user.email}
-                                </span>
+                                    {/* Profile icon */}
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className={`w-3.5 h-3.5 flex-shrink-0 ${isActive('/profile') ? 'text-green-600' : 'text-gray-400'}`}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                    </svg>
+                                </Link>
+
+                                {/* Log out button */}
                                 <button
                                     onClick={handleClick}
-                                    className="bg-gray-900 hover:bg-gray-700 text-white text-xs font-semibold px-4 py-2 rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ml-1 cursor-pointer"
+                                    className="bg-gray-900 hover:bg-gray-700 text-white text-xs font-semibold px-4 py-2 rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md cursor-pointer"
                                 >
                                     Log out
                                 </button>
@@ -149,16 +170,29 @@ const Navbar = () => {
                     <div className="border-t border-gray-100 mt-2 pt-3 flex flex-col gap-2">
                         {user ? (
                             <>
-                                <div className="flex items-center gap-3 px-4 py-2 bg-gray-50 rounded-xl">
-                                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                        <span className="text-green-700 text-sm font-bold uppercase">
+                                {/* Mobile Profile Link */}
+                                <Link
+                                    to="/profile"
+                                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 no-underline ${
+                                        isActive('/profile')
+                                            ? 'bg-green-50 border border-green-100'
+                                            : 'bg-gray-50 hover:bg-green-50'
+                                    }`}
+                                >
+                                    <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center flex-shrink-0">
+                                        <span className="text-white text-sm font-bold uppercase">
                                             {user.email?.[0]}
                                         </span>
                                     </div>
-                                    <span className="text-gray-700 text-sm font-medium truncate">
-                                        {user.email}
-                                    </span>
-                                </div>
+                                    <div className="min-w-0">
+                                        <p className="text-gray-900 text-sm font-semibold truncate">{user.email}</p>
+                                        <p className="text-gray-400 text-xs">View Profile</p>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-gray-400 ml-auto flex-shrink-0">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                    </svg>
+                                </Link>
+
                                 <button
                                     onClick={handleClick}
                                     className="w-full bg-gray-900 hover:bg-gray-700 text-white text-sm font-semibold py-3 rounded-xl transition-colors duration-200 cursor-pointer"

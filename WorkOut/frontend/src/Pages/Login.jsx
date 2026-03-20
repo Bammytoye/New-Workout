@@ -121,10 +121,16 @@ const Login = () => {
                     </form>
 
                     {/* ── Footer ── */}
-                    <p className="text-center text-gray-400 text-sm mt-6">
+                    <p className="text-center text-gray-400 text-sm mt-2">
                         Don't have an account?{' '}
                         <Link to="/signup" className="text-green-600 font-semibold hover:text-green-700 no-underline transition-colors duration-200">
                             Sign up here
+                        </Link>
+                    </p>
+                    <p className="text-center text-gray-400 text-sm">
+                        Just Browsing {' '}
+                        <Link to="/" className="text-green-600 font-semibold hover:text-green-700 no-underline transition-colors duration-200">
+                            Home Page
                         </Link>
                     </p>
                 </div>
