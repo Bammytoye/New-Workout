@@ -14,11 +14,24 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://workout-beta-blush.vercel.app',
+]
+
 app.use(cors({
-    origin: 'https://workout-beta-blush.vercel.app',
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
     methods: ['GET', 'POST', 'DELETE', 'PATCH', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+}))
 
 app.use((req, res, next) => {
     console.log(req.path, req.method);
