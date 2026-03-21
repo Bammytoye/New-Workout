@@ -7,13 +7,13 @@ export const UseSignUp = () => {
     const { dispatch } = useAuthContext();
 
     const signUp = async (email, password) => {
-        setIsLoading(true); // Corrected the spelling of isLoading
+        setIsLoading(true);
         setError(null);
 
-        const response = await fetch('http://localhost:5010/api/user/signup', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user/signup`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email: email, password: password})
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
         });
 
         const json = await response.json();
@@ -29,8 +29,8 @@ export const UseSignUp = () => {
             // Update the auth context
             dispatch({ type: 'LOGIN', payload: json });
             setIsLoading(false);
-        } 
-    };    
+        }
+    };
 
     return { signUp, isLoading, error }; // Changed isloading to isLoading
 };

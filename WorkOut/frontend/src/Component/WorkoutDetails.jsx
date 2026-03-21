@@ -13,7 +13,8 @@ const WorkoutDetails = ({ workout }) => {
         if (!user) return
 
         setDeleting(true)
-        const response = await fetch('http://localhost:5010/api/Workout/' + workout._id, {
+        setDeleting(true)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Workout/${workout._id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${user.token}`
