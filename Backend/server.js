@@ -15,7 +15,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5174',
+    origin: 'https://workout-beta-blush.vercel.app/',
     methods: ['GET', 'POST', 'DELETE', 'PATCH', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
