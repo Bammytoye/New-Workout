@@ -25,6 +25,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get('/', (req, res) => {
+    res.json({ message: 'Zeke Workout API is running 🚀' })
+})
+
 // Routes
 app.use('/api/Workout', workoutRoutes); 
 app.use('/api/user', userRoutes); 
